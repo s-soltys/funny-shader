@@ -14,7 +14,7 @@ let copyLayer;
 
 function preload() {
   // load the shader
-  camShader = loadShader("assets/effect.vert", "assets/effect.frag");
+  camShader = loadShader("assets/basic.vert", "assets/basic.frag");
 }
 
 function setup() {
@@ -66,6 +66,30 @@ function draw() {
     map(spectrum[200], 0, width, 0.5, 1.1),
     map(spectrum[800], 0, height, height, 0) / height
   ]);
+
+
+
+  camShader.setUniform('tex', cam);
+  camShader.setUniform('time', frameCount);
+  
+  let freq = 20.0;
+  let amp = 0.02;
+
+  camShader.setUniform('frequency', freq);
+  camShader.setUniform('amplitude', amp);
+  camShader.setUniform('mouse', [mouseX, mouseY]);
+  camShader.setUniform('u_resolution', [600,600]);
+
+
+
+
+
+
+
+
+
+
+  console.log('volume', vol, spectrum[200]);
 
   camShader.setUniform("time", frameCount * 0.01);
 
